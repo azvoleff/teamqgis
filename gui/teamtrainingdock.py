@@ -201,6 +201,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.layer.emit(SIGNAL("browserCurrentItem(long)"), feature.id())
         if self.settings.value("useDualView"):
             #TODO: Write code for dualview.
+            pass
           
     @pyqtSlot(int, name="on_panCheck_stateChanged")
     def on_panCheck_stateChanged(self, i):
