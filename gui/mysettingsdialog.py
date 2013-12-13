@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# Item Browser is a QGIS plugin which allows you to browse a multiple selection.
+# teamtraining is a QGIS plugin which allows you to browse a multiple selection.
 #
 # Copyright    : (C) 2013 Denis Rouzaud
 # Email        : denis.rouzaud@gmail.com

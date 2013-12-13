@@ -1,6 +1,6 @@
 <RCC>
-    <qresource prefix="/plugins/itembrowser" >
-        <file>icons/itembrowser.svg</file>
+    <qresource prefix="/plugins/teamtraining" >
+        <file>icons/teamtraining.svg</file>
         <file>icons/openform.svg</file>
         <file>icons/action.svg</file>
         <file>icons/settings.svg</file>

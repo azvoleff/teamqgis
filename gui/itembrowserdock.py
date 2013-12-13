@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# Item Browser is a QGIS plugin which allows you to browse a multiple selection.
+# teamtraining is a QGIS plugin which allows you to browse a multiple selection.
 #
 # Copyright    : (C) 2013 Denis Rouzaud
 # Email        : denis.rouzaud@gmail.com
@@ -31,10 +31,10 @@ from qgis.core import QgsPoint, QgsRectangle, QgsFeatureRequest, QgsFeature
 from qgis.gui import QgsRubberBand
 
 from ..core.mysettings import MySettings
-from ..ui.ui_itembrowser import Ui_itembrowser
+from ..ui.ui_teamtraining import Ui_teamtraining
 
 
-class ItemBrowserDock(QDockWidget, Ui_itembrowser):
+class teamtrainingDock(QDockWidget, Ui_teamtraining):
     dockRemoved = pyqtSignal(str)
 
     def __init__(self, iface, layer, currentFeature):
@@ -45,7 +45,7 @@ class ItemBrowserDock(QDockWidget, Ui_itembrowser):
         QDockWidget.__init__(self)
         self.setupUi(self)
 
-        self.setWindowTitle("ItemBrowser: %s" % layer.name())
+        self.setWindowTitle("teamtraining: %s" % layer.name())
         if layer.hasGeometryType() is False:
             self.panCheck.setChecked(False)
             self.panCheck.setEnabled(False)
@@ -54,22 +54,22 @@ class ItemBrowserDock(QDockWidget, Ui_itembrowser):
 
         self.previousButton.setArrowType(Qt.LeftArrow)
         self.nextButton.setArrowType(Qt.RightArrow)
-        icon = QIcon(":/plugins/itembrowser/icons/openform.svg")
+        icon = QIcon(":/plugins/teamtraining/icons/openform.svg")
         self.editFormButton.setIcon(icon)
 
         # actions
-        icon = QIcon(":/plugins/itembrowser/icons/action.svg")
+        icon = QIcon(":/plugins/teamtraining/icons/action.svg")
         self.actionButton.setIcon(icon)
         self.attrAction = layer.actions()
         actions = [self.attrAction[i] for i in range(self.attrAction.size())]
-        preferredAction = layer.customProperty("ItemBrowserPreferedAction", "")
+        preferredAction = layer.customProperty("teamtrainingPreferedAction", "")
         if preferredAction not in actions:
             dfltAction = self.attrAction.defaultAction()
             if dfltAction > len(actions):
                 preferredAction = self.attrAction[dfltAction].name()
         preferredActionFound = False
         for i, action in enumerate(actions):
-            qAction = QAction(QIcon(":/plugins/itembrowser/icons/action.svg"), action.name(), self)
+            qAction = QAction(QIcon(":/plugins/teamtraining/icons/action.svg"), action.name(), self)
             qAction.triggered.connect(lambda: self.doAction(i))
             self.actionButton.addAction(qAction)
             if action.name() == preferredAction:
@@ -94,7 +94,7 @@ class ItemBrowserDock(QDockWidget, Ui_itembrowser):
         self.layer.layerDeleted.disconnect(self.close)
         self.layer.selectionChanged.disconnect(self.selectionChanged)
         if self.settings.value("saveSelectionInProject"):
-            self.layer.setCustomProperty("itemBrowserSelection", repr([]))
+            self.layer.setCustomProperty("teamtrainingSelection", repr([]))
         self.dockRemoved.emit(self.layer.id())
           
     def selectionChanged(self):
@@ -108,7 +108,7 @@ class ItemBrowserDock(QDockWidget, Ui_itembrowser):
         self.browseFrame.setEnabled(True)
         self.subset = self.layer.selectedFeaturesIds()
         if self.settings.value("saveSelectionInProject"):
-            self.layer.setCustomProperty("itemBrowserSelection", repr(self.subset))
+            self.layer.setCustomProperty("teamtrainingSelection", repr(self.subset))
         for fid in self.subset:
             self.listCombo.addItem("%u" % fid)
 
@@ -158,7 +158,7 @@ class ItemBrowserDock(QDockWidget, Ui_itembrowser):
     def doAction(self, i):
         f = self.getCurrentItem()
         self.actionButton.setDefaultAction(self.actionButton.actions()[i])
-        self.layer.setCustomProperty("ItemBrowserPreferedAction", self.attrAction[i].name())
+        self.layer.setCustomProperty("teamtrainingPreferedAction", self.attrAction[i].name())
         self.attrAction.doActionFeature(i, f)
 
     @pyqtSlot(name="on_previousButton_clicked")
@@ -179,7 +179,7 @@ class ItemBrowserDock(QDockWidget, Ui_itembrowser):
     @pyqtSlot(int, name="on_listCombo_activated")
     def saveCurrentFeature(self, i):
         if self.settings.value("saveSelectionInProject"):
-            self.layer.setCustomProperty("itemBrowserCurrentItem", i)
+            self.layer.setCustomProperty("teamtrainingCurrentItem", i)
 
     @pyqtSlot(int, name="on_listCombo_currentIndexChanged")
     def on_listCombo_currentIndexChanged(self, i):

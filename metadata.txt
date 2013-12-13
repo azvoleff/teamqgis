@@ -1,15 +1,15 @@
 
 [general]
-name=Item Browser
-description=Browse a multiple selection with highlighting of current feature.
-version=2.3
+name=teamtraining
+description= (based on itembrowser plugin by Denis Rouzaud)
+version=0.1
 qgisMinimumVersion=2.0
-author=Denis Rouzaud
-email=denis.rouzaud@gmail.com
+author=Alex Zvoleff
+email=azvoleff@conservation.org
 
-icon=icons/itembrowser.svg
-tags=item,browser,feature, multiple,selection
-homepage=http://3nids.github.io/itembrowser
-tracker=https://github.com/3nids/itembrowser/issues
-repository=https://github.com/3nids/itembrowser
+icon=icons/teamtraining.svg
+tags=training,TEAM,classification,sample,feature,selection
+homepage=http://www.azvoleff.com/research/teamtraining
+tracker=https://github.com/azvoleff/teamtraining/issues
+repository=https://github.com/azvoleff/teamtraining
 
