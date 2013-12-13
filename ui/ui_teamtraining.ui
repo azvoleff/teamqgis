@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>233</width>
-    <height>172</height>
+    <width>314</width>
+    <height>257</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QFrame" name="browseFrame">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -130,6 +130,47 @@
             </property>
            </widget>
           </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="translateUp">
+            <property name="text">
+             <string>Move Up</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QPushButton" name="translateRight">
+            <property name="text">
+             <string>Move Right</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QPushButton" name="translateDown">
+            <property name="text">
+             <string>Move Down</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QPushButton" name="translateLeft">
+            <property name="text">
+             <string>Move Left</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </widget>
        </item>
@@ -146,7 +187,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="0" column="2">
            <widget class="QCheckBox" name="scaleCheck">
             <property name="text">
              <string>scale</string>
@@ -154,23 +195,6 @@
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="QToolButton" name="editFormButton">
-            <property name="toolTip">
-             <string notr="true"/>
-            </property>
-            <property name="accessibleDescription">
-             <string notr="true"/>
-            </property>
-            <property name="text">
-             <string notr="true">...</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>../icons/openform.svg</normaloff>../icons/openform.svg</iconset>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
            <widget class="QToolButton" name="actionButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -187,6 +211,43 @@
             </property>
             <property name="popupMode">
              <enum>QToolButton::MenuButtonPopup</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QToolButton" name="editFormButton">
+            <property name="toolTip">
+             <string notr="true"/>
+            </property>
+            <property name="accessibleDescription">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true">...</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../icons/openform.svg</normaloff>../icons/openform.svg</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLineEdit" name="yres"/>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLineEdit" name="xres"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>X shift</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Y shift</string>
             </property>
            </widget>
           </item>
