@@ -44,7 +44,7 @@ class teamtraining():
 
     def initGui(self):
         # browse action
-        self.browserAction = QAction(QIcon(":/plugins/teamtraining/icons/teamtraining.svg"),
+        self.browserAction = QAction(QIcon(":/plugins/teamtraining/icons/team.jpg"),
                                      "Browse selected items of current layer", self.iface.mainWindow())
         self.browserAction.setEnabled(False)
         self.browserAction.triggered.connect(lambda(x): self.openBrowserDock())  # prevent passing "False" to the method

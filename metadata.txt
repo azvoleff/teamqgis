@@ -7,7 +7,7 @@ qgisMinimumVersion=2.0
 author=Alex Zvoleff
 email=azvoleff@conservation.org
 
-icon=icons/teamtraining.svg
+icon=icons/team.jpg
 tags=training,TEAM,classification,sample,feature,selection
 homepage=http://www.azvoleff.com/research/teamtraining
 tracker=https://github.com/azvoleff/teamtraining/issues

@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/plugins/teamtraining" >
-        <file>icons/teamtraining.svg</file>
+        <file>icons/team.jpg</file>
         <file>icons/openform.svg</file>
         <file>icons/action.svg</file>
         <file>icons/settings.svg</file>
