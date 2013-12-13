@@ -199,6 +199,8 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.currentPosLabel.setText("%u/%u" % (i+1, len(self.subset)))
         # emit signal
         self.layer.emit(SIGNAL("browserCurrentItem(long)"), feature.id())
+        if self.settings.value("useDualView"):
+            #TODO: Write code for dualview.
           
     @pyqtSlot(int, name="on_panCheck_stateChanged")
     def on_panCheck_stateChanged(self, i):

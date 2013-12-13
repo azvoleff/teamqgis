@@ -38,6 +38,7 @@ class MySettings(SettingManager):
         # global settings
         self.addSetting("dockArea", "integer", "global", 0)  # 0: right, 1: left
         self.addSetting("saveSelectionInProject", "bool", "global", True)
+        self.addSetting("useDualView", "bool", "global", True)
         self.addSetting("scale", "integer", "global", 4)
         self.addSetting("rubberWidth", "double", "global", 2)
         self.addSetting("rubberColor", "color", "global", QColor(255, 0, 0))
