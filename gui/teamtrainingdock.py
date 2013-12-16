@@ -28,11 +28,13 @@
 from PyQt4.QtCore import SIGNAL, pyqtSlot, pyqtSignal, Qt
 from PyQt4.QtGui import QDockWidget, QIcon, QAction
 from qgis.core import QgsPoint, QgsRectangle, QgsFeatureRequest, QgsFeature
-from qgis.gui import QgsRubberBand
+from qgis.gui import QgsRubberBand, QgsMessageViewer
+from qgis.utils import iface
 
 from ..core.mysettings import MySettings
 from ..ui.ui_teamtraining import Ui_teamtraining
 
+from dualview import ViewWindow
 
 class teamtrainingDock(QDockWidget, Ui_teamtraining):
     dockRemoved = pyqtSignal(str)
@@ -161,6 +163,32 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.layer.setCustomProperty("teamtrainingPreferedAction", self.attrAction[i].name())
         self.attrAction.doActionFeature(i, f)
 
+    def doTranslate(self, trans):
+        # Based on the "doaffine" function in the qgsAffine plugin
+        warn = QgsMessageViewer()
+        if (self.layer.geometryType() == 2):
+            start=1
+        else:
+            start=0
+
+        if (not self.layer.isEditable()):
+            warn.setMessageAsPlainText("Layer not in edit mode.")
+            warn.showMessage()
+        else:
+            feature = self.getCurrentItem()
+            result = feature.geometry()
+            i = start
+            vertex = result.vertexAt(i)
+            fid = feature.id()
+            while (vertex != QgsPoint(0, 0)):
+                newx = vertex.x() + trans[0] * float(self.xres.text())
+                newy = vertex.y() + trans[1] * float(self.yres.text())
+                self.layer.moveVertex(newx, newy, fid, i)
+                print vertex.x, vertex.y, newx, newy, fid, i
+                i += 1
+                vertex = result.vertexAt(i)
+            self.panScaleToItem(feature)
+
     @pyqtSlot(name="on_previousButton_clicked")
     def previousFeaature(self):
         i = self.listCombo.currentIndex()
@@ -200,7 +228,8 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         # emit signal
         self.layer.emit(SIGNAL("browserCurrentItem(long)"), feature.id())
         if self.settings.value("useDualView"):
-            #TODO: Write code for dualview.
+            # dv = ViewWindow(iface.activeLayer())
+            # dv.show()
             pass
           
     @pyqtSlot(int, name="on_panCheck_stateChanged")
@@ -225,3 +254,19 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     @pyqtSlot(name="on_editFormButton_clicked")
     def openFeatureForm(self):
         self.iface.openFeatureForm(self.layer, self.getCurrentItem())
+
+    @pyqtSlot(name="on_translateRight_clicked")
+    def doTranslateRight(self):
+        self.doTranslate((1, 0))
+
+    @pyqtSlot(name="on_translateLeft_clicked")
+    def doTranslateLeft(self):
+        self.doTranslate((-1, 0))
+
+    @pyqtSlot(name="on_translateUp_clicked")
+    def doTranslateUp(self):
+        self.doTranslate((0, 1))
+
+    @pyqtSlot(name="on_translateDown_clicked")
+    def doTranslateDown(self):
+        self.doTranslate((0, -1))
