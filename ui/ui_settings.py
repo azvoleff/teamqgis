@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_settings.ui'
 #
-# Created: Mon Dec 16 16:51:32 2013
+# Created: Tue Dec 17 10:02:04 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_Settings(object):
     def setupUi(self, Settings):
         Settings.setObjectName(_fromUtf8("Settings"))
-        Settings.resize(292, 201)
+        Settings.resize(299, 191)
         self.gridLayout = QtGui.QGridLayout(Settings)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.label_2 = QtGui.QLabel(Settings)
@@ -39,8 +39,6 @@ class Ui_Settings(object):
         self.saveSelectionInProject.setChecked(True)
         self.saveSelectionInProject.setObjectName(_fromUtf8("saveSelectionInProject"))
         self.gridLayout.addWidget(self.saveSelectionInProject, 1, 0, 1, 1)
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem, 5, 0, 1, 1)
         self.rubberWidth = QtGui.QDoubleSpinBox(Settings)
         self.rubberWidth.setToolTip(_fromUtf8(""))
         self.rubberWidth.setDecimals(1)
@@ -77,6 +75,26 @@ class Ui_Settings(object):
         self.useDualView = QtGui.QCheckBox(Settings)
         self.useDualView.setObjectName(_fromUtf8("useDualView"))
         self.gridLayout.addWidget(self.useDualView, 1, 1, 1, 1)
+        self.frame_2 = QtGui.QFrame(Settings)
+        self.frame_2.setMinimumSize(QtCore.QSize(281, 24))
+        self.frame_2.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame_2.setObjectName(_fromUtf8("frame_2"))
+        self.label_5 = QtGui.QLabel(self.frame_2)
+        self.label_5.setGeometry(QtCore.QRect(0, 0, 41, 20))
+        self.label_5.setObjectName(_fromUtf8("label_5"))
+        self.xres = QtGui.QLineEdit(self.frame_2)
+        self.xres.setGeometry(QtCore.QRect(47, 0, 85, 20))
+        self.xres.setInputMethodHints(QtCore.Qt.ImhDigitsOnly|QtCore.Qt.ImhPreferNumbers)
+        self.xres.setObjectName(_fromUtf8("xres"))
+        self.yres = QtGui.QLineEdit(self.frame_2)
+        self.yres.setGeometry(QtCore.QRect(179, 0, 85, 20))
+        self.yres.setInputMethodHints(QtCore.Qt.ImhDigitsOnly|QtCore.Qt.ImhPreferNumbers)
+        self.yres.setObjectName(_fromUtf8("yres"))
+        self.label_6 = QtGui.QLabel(self.frame_2)
+        self.label_6.setGeometry(QtCore.QRect(138, 0, 35, 20))
+        self.label_6.setObjectName(_fromUtf8("label_6"))
+        self.gridLayout.addWidget(self.frame_2, 5, 0, 1, 2)
 
         self.retranslateUi(Settings)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Settings.accept)
@@ -93,4 +111,8 @@ class Ui_Settings(object):
         self.dockArea.setItemText(0, _translate("Settings", "left", None))
         self.dockArea.setItemText(1, _translate("Settings", "right", None))
         self.useDualView.setText(_translate("Settings", "use dual view", None))
+        self.label_5.setText(_translate("Settings", "X shift", None))
+        self.xres.setPlaceholderText(_translate("Settings", "30", None))
+        self.yres.setPlaceholderText(_translate("Settings", "30", None))
+        self.label_6.setText(_translate("Settings", "Y shift", None))
 

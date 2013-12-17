@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>314</width>
-    <height>257</height>
+    <width>308</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -130,54 +130,19 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QPushButton" name="translateUp">
-            <property name="text">
-             <string>Move Up</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
-           <widget class="QPushButton" name="translateRight">
-            <property name="text">
-             <string>Move Right</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QPushButton" name="translateDown">
-            <property name="text">
-             <string>Move Down</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QPushButton" name="translateLeft">
-            <property name="text">
-             <string>Move Left</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
          </layout>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QWidget" name="widget_2" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>276</width>
+           <height>40</height>
+          </size>
+         </property>
          <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QCheckBox" name="panCheck">
             <property name="text">
              <string>pan</string>
@@ -187,14 +152,31 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
+          <item row="1" column="2">
            <widget class="QCheckBox" name="scaleCheck">
             <property name="text">
              <string>scale</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
+          <item row="1" column="4">
+           <widget class="QToolButton" name="editFormButton">
+            <property name="toolTip">
+             <string notr="true"/>
+            </property>
+            <property name="accessibleDescription">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string notr="true">...</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../icons/openform.svg</normaloff>../icons/openform.svg</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
            <widget class="QToolButton" name="actionButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -214,44 +196,75 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
-           <widget class="QToolButton" name="editFormButton">
-            <property name="toolTip">
-             <string notr="true"/>
-            </property>
-            <property name="accessibleDescription">
-             <string notr="true"/>
-            </property>
-            <property name="text">
-             <string notr="true">...</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>../icons/openform.svg</normaloff>../icons/openform.svg</iconset>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QLineEdit" name="yres"/>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLineEdit" name="xres"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>X shift</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Y shift</string>
-            </property>
-           </widget>
-          </item>
          </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QFrame" name="frame">
+         <property name="minimumSize">
+          <size>
+           <width>276</width>
+           <height>84</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QPushButton" name="translateLeft">
+          <property name="geometry">
+           <rect>
+            <x>18</x>
+            <y>29</y>
+            <width>75</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Move Left</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="translateRight">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>29</y>
+            <width>75</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Move Right</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="translateDown">
+          <property name="geometry">
+           <rect>
+            <x>99</x>
+            <y>58</y>
+            <width>75</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Move Down</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="translateUp">
+          <property name="geometry">
+           <rect>
+            <x>99</x>
+            <y>0</y>
+            <width>75</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Move Up</string>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>

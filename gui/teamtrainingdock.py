@@ -181,8 +181,8 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             vertex = result.vertexAt(i)
             fid = feature.id()
             while (vertex != QgsPoint(0, 0)):
-                newx = vertex.x() + trans[0] * float(self.xres.text())
-                newy = vertex.y() + trans[1] * float(self.yres.text())
+                newx = vertex.x() + trans[0] * float(self.settings.value("xres"))
+                newy = vertex.y() + trans[1] * float(self.settings.value("yres"))
                 self.layer.moveVertex(newx, newy, fid, i)
                 print vertex.x, vertex.y, newx, newy, fid, i
                 i += 1
