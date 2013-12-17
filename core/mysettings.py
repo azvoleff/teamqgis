@@ -30,7 +30,6 @@ from ..qgissettingmanager import SettingManager
 
 pluginName = "teamtraining"
 
-
 class MySettings(SettingManager):
     def __init__(self):
         SettingManager.__init__(self, pluginName)
@@ -42,4 +41,3 @@ class MySettings(SettingManager):
         self.addSetting("scale", "integer", "global", 4)
         self.addSetting("rubberWidth", "double", "global", 2)
         self.addSetting("rubberColor", "color", "global", QColor(255, 0, 0))
-
