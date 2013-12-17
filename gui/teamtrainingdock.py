@@ -93,6 +93,36 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.layer.layerModified.connect(self.layerChanged)
         self.layer.editingStopped.connect(self.layerSaved)
 
+    def updateFieldComboBoxes(self):
+        fieldNameMap = self.layer.dataProvider().fieldNameMap()
+        for fieldName in fieldNameMap.keys():
+            self.fieldOneNameComboBox.addItem("%s"%fieldName)
+            self.fieldTwoNameComboBox.addItem("%s"%fieldName)
+            self.fieldThreeNameComboBox.addItem("%s"%fieldName)
+
+        feature = self.getCurrentItem()
+
+        fieldOneNameCurrentIndex = feature.fieldNameIndex(self.fieldOneNameComboBox.currentText())
+        self.fieldOneValueComboBox.setEnabled(True)
+        self.fieldOneValueComboBox.addItem(feature.attribute(self.fieldOneNameComboBox.currentText()))
+
+        fieldTwoNameCurrentIndex = feature.fieldNameIndex(self.fieldTwoNameComboBox.currentText())
+        self.fieldTwoValueComboBox.setEnabled(True)
+        self.fieldTwoValueComboBox.addItem(feature.attribute(self.fieldTwoNameComboBox.currentText()))
+
+        # fieldOneNameCurrentIndex = feature.fieldNameIndex(self.fieldOneNameComboBox.currentText())
+        # self.fieldOneValueComboBox.setEnabled(True)
+        # self.fieldOneValueComboBox.addItem(feature.attribute(self.fieldOneNameComboBox.currentText()))
+
+    def getUniqueFieldValues(self, fieldIndex):
+        uValues = []
+        ft = QgsFeature()
+        while self.layer.dataProvider().nextFeature(ft):
+            atMap = ft.attributeMap()
+            if atMap.values()[fieldIndex].toString() not in uValues:
+                uValues.append(atMap.values()[fieldIndex].toString())
+        return uValues
+
     def setRubber(self, feature):
         self.rubber.setColor(self.settings.value("rubberColor"))
         self.rubber.setWidth(self.settings.value("rubberWidth"))
@@ -123,6 +153,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         for fid in self.subset:
             self.listCombo.addItem("%u" % fid)
         self.setRubber(self.getCurrentItem())
+        self.updateFieldComboBoxes()
 
     def layerChanged(self):
         self.applyChangesButton.setEnabled(True)
@@ -133,6 +164,9 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     def cleanBrowserFields(self):
         self.currentPosLabel.setText('0/0')
         self.listCombo.clear()
+        self.fieldOneNameComboBox.clear()
+        self.fieldTwoNameComboBox.clear()
+        self.fieldThreeNameComboBox.clear()
           
     def panScaleToItem(self, feature):
         if self.panCheck.isChecked() is False:
