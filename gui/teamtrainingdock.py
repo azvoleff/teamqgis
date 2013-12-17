@@ -96,10 +96,9 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     def setRubber(self, feature):
         self.rubber.setColor(self.settings.value("rubberColor"))
         self.rubber.setWidth(self.settings.value("rubberWidth"))
-        #self.rubber.setLineStyle(Qt.DotLine)
-        #self.rubber.setBrushStyle(Qt.NoBrush)
+        ##self.rubber.setLineStyle(Qt.DotLine)
+        self.rubber.setBrushStyle(Qt.NoBrush)
         self.rubber.setToGeometry(feature.geometry(), self.layer)
-        print self.rubber.asGeometry().exportToWkt()
 
     def closeEvent(self, e):
         self.rubber.reset()
