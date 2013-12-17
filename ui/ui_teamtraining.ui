@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>308</width>
-    <height>228</height>
+    <height>328</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
        <property name="margin">
         <number>6</number>
        </property>
-       <item row="1" column="0">
+       <item row="1" column="1">
         <widget class="QWidget" name="widget" native="true">
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="2">
@@ -133,7 +133,7 @@
          </layout>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="3" column="1">
         <widget class="QWidget" name="widget_2" native="true">
          <property name="minimumSize">
           <size>
@@ -205,7 +205,7 @@
          </layout>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="2" column="1">
         <widget class="QFrame" name="frame">
          <property name="minimumSize">
           <size>
@@ -285,6 +285,91 @@
           </property>
           <property name="text">
            <string>Apply</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QFrame" name="frame_2">
+         <property name="minimumSize">
+          <size>
+           <width>276</width>
+           <height>94</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QComboBox" name="fieldOneNameComboBox">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>131</width>
+            <height>20</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="fieldOneValueComboBox">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>138</x>
+            <y>10</y>
+            <width>131</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="fieldTwoNameComboBox">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>40</y>
+            <width>131</width>
+            <height>20</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="fieldTwoValueComboBox">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>138</x>
+            <y>40</y>
+            <width>131</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="fieldThreeNameComboBox">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>70</y>
+            <width>131</width>
+            <height>20</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="fieldThreeValueComboBox">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>138</x>
+            <y>70</y>
+            <width>131</width>
+            <height>22</height>
+           </rect>
           </property>
          </widget>
         </widget>

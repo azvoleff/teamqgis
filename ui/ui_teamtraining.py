@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_teamtraining.ui'
 #
-# Created: Tue Dec 17 11:44:58 2013
+# Created: Tue Dec 17 14:05:19 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_teamtraining(object):
     def setupUi(self, teamtraining):
         teamtraining.setObjectName(_fromUtf8("teamtraining"))
-        teamtraining.resize(308, 228)
+        teamtraining.resize(308, 328)
         teamtraining.setWindowTitle(_fromUtf8("teamtraining"))
         self.dockWidgetContents = QtGui.QWidget()
         self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
@@ -91,7 +91,7 @@ class Ui_teamtraining(object):
         self.currentPosLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.currentPosLabel.setObjectName(_fromUtf8("currentPosLabel"))
         self.gridLayout.addWidget(self.currentPosLabel, 1, 0, 1, 1)
-        self.gridLayout_2.addWidget(self.widget, 1, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.widget, 1, 1, 1, 1)
         self.widget_2 = QtGui.QWidget(self.browseFrame)
         self.widget_2.setMinimumSize(QtCore.QSize(276, 40))
         self.widget_2.setObjectName(_fromUtf8("widget_2"))
@@ -128,7 +128,7 @@ class Ui_teamtraining(object):
         self.actionButton.setPopupMode(QtGui.QToolButton.MenuButtonPopup)
         self.actionButton.setObjectName(_fromUtf8("actionButton"))
         self.gridLayout_4.addWidget(self.actionButton, 1, 3, 1, 1)
-        self.gridLayout_2.addWidget(self.widget_2, 3, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.widget_2, 3, 1, 1, 1)
         self.frame = QtGui.QFrame(self.browseFrame)
         self.frame.setMinimumSize(QtCore.QSize(276, 84))
         self.frame.setFrameShape(QtGui.QFrame.NoFrame)
@@ -150,7 +150,34 @@ class Ui_teamtraining(object):
         self.applyChangesButton.setEnabled(False)
         self.applyChangesButton.setGeometry(QtCore.QRect(115, 30, 41, 23))
         self.applyChangesButton.setObjectName(_fromUtf8("applyChangesButton"))
-        self.gridLayout_2.addWidget(self.frame, 2, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.frame, 2, 1, 1, 1)
+        self.frame_2 = QtGui.QFrame(self.browseFrame)
+        self.frame_2.setMinimumSize(QtCore.QSize(276, 94))
+        self.frame_2.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame_2.setObjectName(_fromUtf8("frame_2"))
+        self.fieldOneNameComboBox = QtGui.QComboBox(self.frame_2)
+        self.fieldOneNameComboBox.setGeometry(QtCore.QRect(0, 10, 131, 20))
+        self.fieldOneNameComboBox.setObjectName(_fromUtf8("fieldOneNameComboBox"))
+        self.fieldOneValueComboBox = QtGui.QComboBox(self.frame_2)
+        self.fieldOneValueComboBox.setEnabled(False)
+        self.fieldOneValueComboBox.setGeometry(QtCore.QRect(138, 10, 131, 22))
+        self.fieldOneValueComboBox.setObjectName(_fromUtf8("fieldOneValueComboBox"))
+        self.fieldTwoNameComboBox = QtGui.QComboBox(self.frame_2)
+        self.fieldTwoNameComboBox.setGeometry(QtCore.QRect(0, 40, 131, 20))
+        self.fieldTwoNameComboBox.setObjectName(_fromUtf8("fieldTwoNameComboBox"))
+        self.fieldTwoValueComboBox = QtGui.QComboBox(self.frame_2)
+        self.fieldTwoValueComboBox.setEnabled(False)
+        self.fieldTwoValueComboBox.setGeometry(QtCore.QRect(138, 40, 131, 22))
+        self.fieldTwoValueComboBox.setObjectName(_fromUtf8("fieldTwoValueComboBox"))
+        self.fieldThreeNameComboBox = QtGui.QComboBox(self.frame_2)
+        self.fieldThreeNameComboBox.setGeometry(QtCore.QRect(0, 70, 131, 20))
+        self.fieldThreeNameComboBox.setObjectName(_fromUtf8("fieldThreeNameComboBox"))
+        self.fieldThreeValueComboBox = QtGui.QComboBox(self.frame_2)
+        self.fieldThreeValueComboBox.setEnabled(False)
+        self.fieldThreeValueComboBox.setGeometry(QtCore.QRect(138, 70, 131, 22))
+        self.fieldThreeValueComboBox.setObjectName(_fromUtf8("fieldThreeValueComboBox"))
+        self.gridLayout_2.addWidget(self.frame_2, 5, 1, 1, 1)
         self.gridLayout_3.addWidget(self.browseFrame, 0, 0, 1, 1)
         teamtraining.setWidget(self.dockWidgetContents)
 
