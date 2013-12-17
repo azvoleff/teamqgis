@@ -146,42 +146,10 @@
        <string>X shift</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="xres">
-      <property name="geometry">
-       <rect>
-        <x>47</x>
-        <y>0</y>
-        <width>85</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="inputMethodHints">
-       <set>Qt::ImhDigitsOnly|Qt::ImhPreferNumbers</set>
-      </property>
-      <property name="placeholderText">
-       <string>30</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="yres">
-      <property name="geometry">
-       <rect>
-        <x>179</x>
-        <y>0</y>
-        <width>85</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="inputMethodHints">
-       <set>Qt::ImhDigitsOnly|Qt::ImhPreferNumbers</set>
-      </property>
-      <property name="placeholderText">
-       <string>30</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>138</x>
+        <x>150</x>
         <y>0</y>
         <width>35</width>
         <height>20</height>
@@ -189,6 +157,50 @@
       </property>
       <property name="text">
        <string>Y shift</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="yres">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>0</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="decimals">
+       <number>4</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>600.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>30.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="xres">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>0</y>
+        <width>91</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="decimals">
+       <number>4</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>600.000000000000000</double>
+      </property>
+      <property name="value">
+       <double>30.000000000000000</double>
       </property>
      </widget>
     </widget>

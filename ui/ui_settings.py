@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_settings.ui'
 #
-# Created: Tue Dec 17 10:02:04 2013
+# Created: Tue Dec 17 10:16:49 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,17 +83,23 @@ class Ui_Settings(object):
         self.label_5 = QtGui.QLabel(self.frame_2)
         self.label_5.setGeometry(QtCore.QRect(0, 0, 41, 20))
         self.label_5.setObjectName(_fromUtf8("label_5"))
-        self.xres = QtGui.QLineEdit(self.frame_2)
-        self.xres.setGeometry(QtCore.QRect(47, 0, 85, 20))
-        self.xres.setInputMethodHints(QtCore.Qt.ImhDigitsOnly|QtCore.Qt.ImhPreferNumbers)
-        self.xres.setObjectName(_fromUtf8("xres"))
-        self.yres = QtGui.QLineEdit(self.frame_2)
-        self.yres.setGeometry(QtCore.QRect(179, 0, 85, 20))
-        self.yres.setInputMethodHints(QtCore.Qt.ImhDigitsOnly|QtCore.Qt.ImhPreferNumbers)
-        self.yres.setObjectName(_fromUtf8("yres"))
         self.label_6 = QtGui.QLabel(self.frame_2)
-        self.label_6.setGeometry(QtCore.QRect(138, 0, 35, 20))
+        self.label_6.setGeometry(QtCore.QRect(150, 0, 35, 20))
         self.label_6.setObjectName(_fromUtf8("label_6"))
+        self.yres = QtGui.QDoubleSpinBox(self.frame_2)
+        self.yres.setGeometry(QtCore.QRect(190, 0, 91, 22))
+        self.yres.setDecimals(4)
+        self.yres.setMinimum(0.0)
+        self.yres.setMaximum(600.0)
+        self.yres.setProperty("value", 30.0)
+        self.yres.setObjectName(_fromUtf8("yres"))
+        self.xres = QtGui.QDoubleSpinBox(self.frame_2)
+        self.xres.setGeometry(QtCore.QRect(40, 0, 91, 22))
+        self.xres.setDecimals(4)
+        self.xres.setMinimum(0.0)
+        self.xres.setMaximum(600.0)
+        self.xres.setProperty("value", 30.0)
+        self.xres.setObjectName(_fromUtf8("xres"))
         self.gridLayout.addWidget(self.frame_2, 5, 0, 1, 2)
 
         self.retranslateUi(Settings)
@@ -112,7 +118,5 @@ class Ui_Settings(object):
         self.dockArea.setItemText(1, _translate("Settings", "right", None))
         self.useDualView.setText(_translate("Settings", "use dual view", None))
         self.label_5.setText(_translate("Settings", "X shift", None))
-        self.xres.setPlaceholderText(_translate("Settings", "30", None))
-        self.yres.setPlaceholderText(_translate("Settings", "30", None))
         self.label_6.setText(_translate("Settings", "Y shift", None))
 

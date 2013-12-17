@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_teamtraining.ui'
 #
-# Created: Tue Dec 17 10:02:04 2013
+# Created: Tue Dec 17 10:15:10 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -129,8 +129,8 @@ class Ui_teamtraining(object):
         self.gridLayout_2.addWidget(self.widget_2, 3, 0, 1, 1)
         self.frame = QtGui.QFrame(self.browseFrame)
         self.frame.setMinimumSize(QtCore.QSize(276, 84))
-        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame.setFrameShape(QtGui.QFrame.NoFrame)
+        self.frame.setFrameShadow(QtGui.QFrame.Plain)
         self.frame.setObjectName(_fromUtf8("frame"))
         self.translateLeft = QtGui.QPushButton(self.frame)
         self.translateLeft.setGeometry(QtCore.QRect(18, 29, 75, 23))
