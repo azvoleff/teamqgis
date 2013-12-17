@@ -93,6 +93,14 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.layer.layerModified.connect(self.layerChanged)
         self.layer.editingStopped.connect(self.layerSaved)
 
+    def setRubber(self, feature):
+        self.rubber.setColor(self.settings.value("rubberColor"))
+        self.rubber.setWidth(self.settings.value("rubberWidth"))
+        #self.rubber.setLineStyle(Qt.DotLine)
+        #self.rubber.setBrushStyle(Qt.NoBrush)
+        self.rubber.setToGeometry(feature.geometry(), self.layer)
+        print self.rubber.asGeometry().exportToWkt()
+
     def closeEvent(self, e):
         self.rubber.reset()
         self.layer.layerDeleted.disconnect(self.close)
@@ -115,6 +123,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             self.layer.setCustomProperty("teamtrainingSelection", repr(self.subset))
         for fid in self.subset:
             self.listCombo.addItem("%u" % fid)
+        self.setRubber(self.getCurrentItem())
 
     def layerChanged(self):
         self.applyChangesButton.setEnabled(True)
@@ -196,11 +205,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             self.layer.changeGeometry(fid, result)
             self.iface.mapCanvas().refresh()
             self.rubber.reset()
-            width = self.settings.value("rubberWidth")
-            color = self.settings.value("rubberColor")
-            self.rubber.setColor(color)
-            self.rubber.setWidth(width)
-            self.rubber.setToGeometry(feature.geometry(), self.layer)
+            self.setRubber(feature)
 
     @pyqtSlot(name="on_previousButton_clicked")
     def previousFeature(self):
@@ -229,11 +234,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             return
         self.rubber.reset()
         if self.listCombo.count() > 1:
-            width = self.settings.value("rubberWidth")
-            color = self.settings.value("rubberColor")
-            self.rubber.setColor(color)
-            self.rubber.setWidth(width)
-            self.rubber.setToGeometry(feature.geometry(), self.layer)
+            self.setRubber(feature)
         # scale to feature
         self.panScaleToItem(feature)
         # Update browser
