@@ -271,7 +271,7 @@
            <string>Move Up</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="applyTranslateButton">
+         <widget class="QPushButton" name="applyChangesButton">
           <property name="enabled">
            <bool>false</bool>
           </property>

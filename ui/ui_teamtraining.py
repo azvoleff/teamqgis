@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_teamtraining.ui'
 #
-# Created: Tue Dec 17 10:39:14 2013
+# Created: Tue Dec 17 11:44:58 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -146,10 +146,10 @@ class Ui_teamtraining(object):
         self.translateUpButton = QtGui.QPushButton(self.frame)
         self.translateUpButton.setGeometry(QtCore.QRect(99, 0, 75, 23))
         self.translateUpButton.setObjectName(_fromUtf8("translateUpButton"))
-        self.applyTranslateButton = QtGui.QPushButton(self.frame)
-        self.applyTranslateButton.setEnabled(False)
-        self.applyTranslateButton.setGeometry(QtCore.QRect(115, 30, 41, 23))
-        self.applyTranslateButton.setObjectName(_fromUtf8("applyTranslateButton"))
+        self.applyChangesButton = QtGui.QPushButton(self.frame)
+        self.applyChangesButton.setEnabled(False)
+        self.applyChangesButton.setGeometry(QtCore.QRect(115, 30, 41, 23))
+        self.applyChangesButton.setObjectName(_fromUtf8("applyChangesButton"))
         self.gridLayout_2.addWidget(self.frame, 2, 0, 1, 1)
         self.gridLayout_3.addWidget(self.browseFrame, 0, 0, 1, 1)
         teamtraining.setWidget(self.dockWidgetContents)
@@ -165,5 +165,5 @@ class Ui_teamtraining(object):
         self.translateRightButton.setText(_translate("teamtraining", "Move Right", None))
         self.translateDownButton.setText(_translate("teamtraining", "Move Down", None))
         self.translateUpButton.setText(_translate("teamtraining", "Move Up", None))
-        self.applyTranslateButton.setText(_translate("teamtraining", "Apply", None))
+        self.applyChangesButton.setText(_translate("teamtraining", "Apply", None))
 

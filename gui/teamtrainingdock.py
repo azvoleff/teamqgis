@@ -117,10 +117,10 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             self.listCombo.addItem("%u" % fid)
 
     def layerChanged(self):
-        self.applyTranslateButton.setEnabled(True)
+        self.applyChangesButton.setEnabled(True)
 
     def layerSaved(self):
-        self.applyTranslateButton.setEnabled(False)
+        self.applyChangesButton.setEnabled(False)
 
     def cleanBrowserFields(self):
         self.currentPosLabel.setText('0/0')
@@ -284,8 +284,8 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     def doTranslateDown(self):
         self.doTranslate((0, -1))
 
-    @pyqtSlot(name="on_applyTranslateButton_clicked")
-    def applyTranslate(self):
+    @pyqtSlot(name="on_applyChangesButton_clicked")
+    def applyChanges(self):
         self.layer.commitChanges()
         self.layer.startEditing()
         self.layer.updateExtents()
