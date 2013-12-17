@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_teamtraining.ui'
 #
-# Created: Tue Dec 17 10:30:44 2013
+# Created: Tue Dec 17 10:39:14 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -134,18 +134,22 @@ class Ui_teamtraining(object):
         self.frame.setFrameShape(QtGui.QFrame.NoFrame)
         self.frame.setFrameShadow(QtGui.QFrame.Plain)
         self.frame.setObjectName(_fromUtf8("frame"))
-        self.translateLeft = QtGui.QPushButton(self.frame)
-        self.translateLeft.setGeometry(QtCore.QRect(18, 29, 75, 23))
-        self.translateLeft.setObjectName(_fromUtf8("translateLeft"))
-        self.translateRight = QtGui.QPushButton(self.frame)
-        self.translateRight.setGeometry(QtCore.QRect(180, 29, 75, 23))
-        self.translateRight.setObjectName(_fromUtf8("translateRight"))
-        self.translateDown = QtGui.QPushButton(self.frame)
-        self.translateDown.setGeometry(QtCore.QRect(99, 58, 75, 23))
-        self.translateDown.setObjectName(_fromUtf8("translateDown"))
-        self.translateUp = QtGui.QPushButton(self.frame)
-        self.translateUp.setGeometry(QtCore.QRect(99, 0, 75, 23))
-        self.translateUp.setObjectName(_fromUtf8("translateUp"))
+        self.translateLeftButton = QtGui.QPushButton(self.frame)
+        self.translateLeftButton.setGeometry(QtCore.QRect(16, 29, 75, 23))
+        self.translateLeftButton.setObjectName(_fromUtf8("translateLeftButton"))
+        self.translateRightButton = QtGui.QPushButton(self.frame)
+        self.translateRightButton.setGeometry(QtCore.QRect(180, 30, 75, 23))
+        self.translateRightButton.setObjectName(_fromUtf8("translateRightButton"))
+        self.translateDownButton = QtGui.QPushButton(self.frame)
+        self.translateDownButton.setGeometry(QtCore.QRect(99, 58, 75, 23))
+        self.translateDownButton.setObjectName(_fromUtf8("translateDownButton"))
+        self.translateUpButton = QtGui.QPushButton(self.frame)
+        self.translateUpButton.setGeometry(QtCore.QRect(99, 0, 75, 23))
+        self.translateUpButton.setObjectName(_fromUtf8("translateUpButton"))
+        self.applyTranslateButton = QtGui.QPushButton(self.frame)
+        self.applyTranslateButton.setEnabled(False)
+        self.applyTranslateButton.setGeometry(QtCore.QRect(115, 30, 41, 23))
+        self.applyTranslateButton.setObjectName(_fromUtf8("applyTranslateButton"))
         self.gridLayout_2.addWidget(self.frame, 2, 0, 1, 1)
         self.gridLayout_3.addWidget(self.browseFrame, 0, 0, 1, 1)
         teamtraining.setWidget(self.dockWidgetContents)
@@ -157,8 +161,9 @@ class Ui_teamtraining(object):
         self.panCheck.setText(_translate("teamtraining", "pan", None))
         self.scaleCheck.setText(_translate("teamtraining", "scale", None))
         self.actionButton.setText(_translate("teamtraining", "...", None))
-        self.translateLeft.setText(_translate("teamtraining", "Move Left", None))
-        self.translateRight.setText(_translate("teamtraining", "Move Right", None))
-        self.translateDown.setText(_translate("teamtraining", "Move Down", None))
-        self.translateUp.setText(_translate("teamtraining", "Move Up", None))
+        self.translateLeftButton.setText(_translate("teamtraining", "Move Left", None))
+        self.translateRightButton.setText(_translate("teamtraining", "Move Right", None))
+        self.translateDownButton.setText(_translate("teamtraining", "Move Down", None))
+        self.translateUpButton.setText(_translate("teamtraining", "Move Up", None))
+        self.applyTranslateButton.setText(_translate("teamtraining", "Apply", None))
 

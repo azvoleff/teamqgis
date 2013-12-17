@@ -90,6 +90,8 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             self.listCombo.setCurrentIndex(currentFeature)
         self.layer.layerDeleted.connect(self.close)
         self.layer.selectionChanged.connect(self.selectionChanged)
+        self.layer.layerModified.connect(self.layerChanged)
+        self.layer.editingStopped.connect(self.layerSaved)
 
     def closeEvent(self, e):
         self.rubber.reset()
@@ -113,6 +115,12 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             self.layer.setCustomProperty("teamtrainingSelection", repr(self.subset))
         for fid in self.subset:
             self.listCombo.addItem("%u" % fid)
+
+    def layerChanged(self):
+        self.applyTranslateButton.setEnabled(True)
+
+    def layerSaved(self):
+        self.applyTranslateButton.setEnabled(False)
 
     def cleanBrowserFields(self):
         self.currentPosLabel.setText('0/0')
@@ -170,7 +178,6 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             start=1
         else:
             start=0
-
         if (not self.layer.isEditable()):
             warn.setMessageAsPlainText("Layer not in edit mode.")
             warn.showMessage()
@@ -183,18 +190,25 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             while (vertex != QgsPoint(0, 0)):
                 newx = vertex.x() + trans[0] * float(self.settings.value("xres"))
                 newy = vertex.y() + trans[1] * float(self.settings.value("yres"))
-                self.layer.moveVertex(newx, newy, fid, i)
+                result.moveVertex(newx, newy, i)
                 i += 1
                 vertex = result.vertexAt(i)
-            self.panScaleToItem(feature)
+            self.layer.changeGeometry(fid, result)
+            self.iface.mapCanvas().refresh()
+            self.rubber.reset()
+            width = self.settings.value("rubberWidth")
+            color = self.settings.value("rubberColor")
+            self.rubber.setColor(color)
+            self.rubber.setWidth(width)
+            self.rubber.setToGeometry(feature.geometry(), self.layer)
 
     @pyqtSlot(name="on_previousButton_clicked")
-    def previousFeaature(self):
+    def previousFeature(self):
         i = self.listCombo.currentIndex()
         n = max(0, i-1)
         self.listCombo.setCurrentIndex(n)
         self.saveCurrentFeature(n)
-          
+
     @pyqtSlot(name="on_nextButton_clicked")
     def nextFeature(self):
         i = self.listCombo.currentIndex()
@@ -254,18 +268,25 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     def openFeatureForm(self):
         self.iface.openFeatureForm(self.layer, self.getCurrentItem())
 
-    @pyqtSlot(name="on_translateRight_clicked")
+    @pyqtSlot(name="on_translateRightButton_clicked")
     def doTranslateRight(self):
         self.doTranslate((1, 0))
 
-    @pyqtSlot(name="on_translateLeft_clicked")
+    @pyqtSlot(name="on_translateLeftButton_clicked")
     def doTranslateLeft(self):
         self.doTranslate((-1, 0))
 
-    @pyqtSlot(name="on_translateUp_clicked")
+    @pyqtSlot(name="on_translateUpButton_clicked")
     def doTranslateUp(self):
         self.doTranslate((0, 1))
 
-    @pyqtSlot(name="on_translateDown_clicked")
+    @pyqtSlot(name="on_translateDownButton_clicked")
     def doTranslateDown(self):
         self.doTranslate((0, -1))
+
+    @pyqtSlot(name="on_applyTranslateButton_clicked")
+    def applyTranslate(self):
+        self.layer.commitChanges()
+        self.layer.startEditing()
+        self.layer.updateExtents()
+        self.iface.mapCanvas().refresh()

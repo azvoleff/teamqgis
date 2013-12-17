@@ -219,10 +219,10 @@
          <property name="frameShadow">
           <enum>QFrame::Plain</enum>
          </property>
-         <widget class="QPushButton" name="translateLeft">
+         <widget class="QPushButton" name="translateLeftButton">
           <property name="geometry">
            <rect>
-            <x>18</x>
+            <x>16</x>
             <y>29</y>
             <width>75</width>
             <height>23</height>
@@ -232,11 +232,11 @@
            <string>Move Left</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="translateRight">
+         <widget class="QPushButton" name="translateRightButton">
           <property name="geometry">
            <rect>
             <x>180</x>
-            <y>29</y>
+            <y>30</y>
             <width>75</width>
             <height>23</height>
            </rect>
@@ -245,7 +245,7 @@
            <string>Move Right</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="translateDown">
+         <widget class="QPushButton" name="translateDownButton">
           <property name="geometry">
            <rect>
             <x>99</x>
@@ -258,7 +258,7 @@
            <string>Move Down</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="translateUp">
+         <widget class="QPushButton" name="translateUpButton">
           <property name="geometry">
            <rect>
             <x>99</x>
@@ -269,6 +269,22 @@
           </property>
           <property name="text">
            <string>Move Up</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="applyTranslateButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>115</x>
+            <y>30</y>
+            <width>41</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Apply</string>
           </property>
          </widget>
         </widget>
