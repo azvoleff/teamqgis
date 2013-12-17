@@ -1,3 +1,4 @@
-tmp/
+qgissettingmanager/*
 *.qgs
 *.pyc
+*.swp
