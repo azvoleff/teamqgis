@@ -184,7 +184,6 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
                 newx = vertex.x() + trans[0] * float(self.settings.value("xres"))
                 newy = vertex.y() + trans[1] * float(self.settings.value("yres"))
                 self.layer.moveVertex(newx, newy, fid, i)
-                print vertex.x, vertex.y, newx, newy, fid, i
                 i += 1
                 vertex = result.vertexAt(i)
             self.panScaleToItem(feature)

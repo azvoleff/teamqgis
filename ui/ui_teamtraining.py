@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_teamtraining.ui'
 #
-# Created: Tue Dec 17 10:15:10 2013
+# Created: Tue Dec 17 10:30:44 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -103,6 +103,8 @@ class Ui_teamtraining(object):
         self.panCheck.setObjectName(_fromUtf8("panCheck"))
         self.gridLayout_4.addWidget(self.panCheck, 1, 0, 1, 1)
         self.scaleCheck = QtGui.QCheckBox(self.widget_2)
+        self.scaleCheck.setCheckable(True)
+        self.scaleCheck.setChecked(True)
         self.scaleCheck.setObjectName(_fromUtf8("scaleCheck"))
         self.gridLayout_4.addWidget(self.scaleCheck, 1, 2, 1, 1)
         self.editFormButton = QtGui.QToolButton(self.widget_2)
