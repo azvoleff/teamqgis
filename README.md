@@ -1,4 +1,4 @@
-# teamtraining
+# teamqgis
 
-`teamtraining` is a Quantum GIS (QGIS) plugin for selecting training data for 
+`teamqgis` is a Quantum GIS (QGIS) plugin for selecting training data for 
 the Tropical Ecology Assessment and Monitoring Network

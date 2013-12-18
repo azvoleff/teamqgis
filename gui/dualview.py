@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# teamtraining is a QGIS plugin which allows you to browse a multiple selection.
+# teamqgis is a QGIS plugin which allows you to browse a multiple selection.
 #
 # Copyright    : (C) 2013 Alex Zvoleff
 # Email        : azvoleff@conservation.org

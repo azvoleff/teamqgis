@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/plugins/teamtraining" >
+    <qresource prefix="/plugins/teamqgis" >
         <file>icons/team.jpg</file>
         <file>icons/openform.svg</file>
         <file>icons/action.svg</file>

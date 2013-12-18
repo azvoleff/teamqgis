@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# teamtraining is a QGIS plugin which allows you to browse a multiple selection.
+# teamqgis is a QGIS plugin which allows you to browse a multiple selection.
 #
 # Copyright    : (C) 2013 Denis Rouzaud
 # Email        : denis.rouzaud@gmail.com
@@ -28,7 +28,7 @@
 from PyQt4.QtGui import QColor
 from ..qgissettingmanager import SettingManager
 
-pluginName = "teamtraining"
+pluginName = "teamqgis"
 
 class MySettings(SettingManager):
     def __init__(self):

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# teamtraining is a QGIS plugin which allows you to browse a multiple selection.
+# teamqgis is a QGIS plugin which allows you to browse a multiple selection.
 #
 # Copyright    : (C) 2013 Denis Rouzaud
 # Email        : denis.rouzaud@gmail.com
@@ -32,11 +32,11 @@ from qgis.gui import QgsRubberBand, QgsMessageBar
 from qgis.utils import iface
 
 from ..core.mysettings import MySettings
-from ..ui.ui_teamtraining import Ui_teamtraining
+from ..ui.ui_teamqgis import Ui_teamqgis
 
 from dualview import ViewWindow
 
-class teamtrainingDock(QDockWidget, Ui_teamtraining):
+class teamqgisDock(QDockWidget, Ui_teamqgis):
     dockRemoved = pyqtSignal(str)
 
     def __init__(self, iface, layer, currentFeature):
@@ -47,7 +47,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         QDockWidget.__init__(self)
         self.setupUi(self)
 
-        self.setWindowTitle("teamtraining: %s" % layer.name())
+        self.setWindowTitle("teamqgis: %s" % layer.name())
         if layer.hasGeometryType() is False:
             self.panCheck.setChecked(False)
             self.panCheck.setEnabled(False)
@@ -56,22 +56,22 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
 
         self.previousButton.setArrowType(Qt.LeftArrow)
         self.nextButton.setArrowType(Qt.RightArrow)
-        icon = QIcon(":/plugins/teamtraining/icons/openform.svg")
+        icon = QIcon(":/plugins/teamqgis/icons/openform.svg")
         self.editFormButton.setIcon(icon)
 
         # actions
-        icon = QIcon(":/plugins/teamtraining/icons/action.svg")
+        icon = QIcon(":/plugins/teamqgis/icons/action.svg")
         self.actionButton.setIcon(icon)
         self.attrAction = layer.actions()
         actions = [self.attrAction[i] for i in range(self.attrAction.size())]
-        preferredAction = layer.customProperty("teamtrainingPreferedAction", "")
+        preferredAction = layer.customProperty("teamqgisPreferedAction", "")
         if preferredAction not in actions:
             dfltAction = self.attrAction.defaultAction()
             if dfltAction > len(actions):
                 preferredAction = self.attrAction[dfltAction].name()
         preferredActionFound = False
         for i, action in enumerate(actions):
-            qAction = QAction(QIcon(":/plugins/teamtraining/icons/action.svg"), action.name(), self)
+            qAction = QAction(QIcon(":/plugins/teamqgis/icons/action.svg"), action.name(), self)
             qAction.triggered.connect(lambda: self.doAction(i))
             self.actionButton.addAction(qAction)
             if action.name() == preferredAction:
@@ -89,7 +89,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
 
         # Restore saved nameComboBox current indices if they exist
         for nameComboBox in self.nameComboBoxes:
-            fieldName = layer.customProperty("teamtraining" + nameComboBox.objectName())
+            fieldName = layer.customProperty("teamqgis" + nameComboBox.objectName())
             if fieldName != None:
                 nameComboBox.setCurrentIndex(nameComboBox.findText(fieldName))
 
@@ -156,7 +156,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.layer.editingStopped.disconnect(self.editingStopped)
         self.layer.editingStarted.disconnect(self.editingStarted)
         if self.settings.value("saveSelectionInProject"):
-            self.layer.setCustomProperty("teamtrainingSelection", repr([]))
+            self.layer.setCustomProperty("teamqgisSelection", repr([]))
         self.dockRemoved.emit(self.layer.id())
           
     def selectionChanged(self):
@@ -170,7 +170,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.browseFrame.setEnabled(True)
         self.subset = self.layer.selectedFeaturesIds()
         if self.settings.value("saveSelectionInProject"):
-            self.layer.setCustomProperty("teamtrainingSelection", repr(self.subset))
+            self.layer.setCustomProperty("teamqgisSelection", repr(self.subset))
         for fid in self.subset:
             self.listCombo.addItem("%u" % fid)
         self.setRubber(self.getCurrentItem())
@@ -244,7 +244,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     def doAction(self, i):
         f = self.getCurrentItem()
         self.actionButton.setDefaultAction(self.actionButton.actions()[i])
-        self.layer.setCustomProperty("teamtrainingPreferedAction", self.attrAction[i].name())
+        self.layer.setCustomProperty("teamqgisPreferedAction", self.attrAction[i].name())
         self.attrAction.doActionFeature(i, f)
 
     def doTranslate(self, trans):
@@ -283,7 +283,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.updateValueComboBoxes()
 
     def nameComboBox_activated(self, i, nameComboBox):
-        self.layer.setCustomProperty('teamtraining' + nameComboBox.objectName(), nameComboBox.currentText())
+        self.layer.setCustomProperty('teamqgis' + nameComboBox.objectName(), nameComboBox.currentText())
 
     @pyqtSlot(name="on_previousButton_clicked")
     def previousFeature(self):
@@ -303,7 +303,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     @pyqtSlot(int, name="on_listCombo_activated")
     def saveCurrentFeature(self, i):
         if self.settings.value("saveSelectionInProject"):
-            self.layer.setCustomProperty("teamtrainingCurrentItem", i)
+            self.layer.setCustomProperty("teamqgisCurrentItem", i)
 
     @pyqtSlot(int, name="on_fieldOneNameComboBox_activated")
     def fieldOneNameComboBox_activated(self, i):

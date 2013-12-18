@@ -1,6 +1,6 @@
 
 [general]
-name=teamtraining
+name=teamqgis
 description= (based on itembrowser plugin by Denis Rouzaud)
 version=0.1
 qgisMinimumVersion=2.0
@@ -9,7 +9,7 @@ email=azvoleff@conservation.org
 
 icon=icons/team.jpg
 tags=training,TEAM,classification,sample,feature,selection
-homepage=http://www.azvoleff.com/research/teamtraining
-tracker=https://github.com/azvoleff/teamtraining/issues
-repository=https://github.com/azvoleff/teamtraining
+homepage=http://www.azvoleff.com/research/teamqgis
+tracker=https://github.com/azvoleff/teamqgis/issues
+repository=https://github.com/azvoleff/teamqgis
 

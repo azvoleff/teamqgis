@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_settings.ui'
 #
-# Created: Wed Dec 18 09:35:37 2013
+# Created: Wed Dec 18 17:11:11 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -130,7 +130,7 @@ class Ui_Settings(object):
         QtCore.QMetaObject.connectSlotsByName(Settings)
 
     def retranslateUi(self, Settings):
-        Settings.setWindowTitle(_translate("Settings", "teamtraining :: settings", None))
+        Settings.setWindowTitle(_translate("Settings", "teamqgis :: settings", None))
         self.dockArea.setItemText(0, _translate("Settings", "left", None))
         self.dockArea.setItemText(1, _translate("Settings", "right", None))
         self.label_5.setText(_translate("Settings", "X shift", None))

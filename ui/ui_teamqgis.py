@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/ui_teamtraining.ui'
+# Form implementation generated from reading ui file 'ui/ui_teamqgis.ui'
 #
-# Created: Wed Dec 18 10:54:55 2013
+# Created: Wed Dec 18 17:11:11 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,11 +23,11 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_teamtraining(object):
-    def setupUi(self, teamtraining):
-        teamtraining.setObjectName(_fromUtf8("teamtraining"))
-        teamtraining.resize(308, 328)
-        teamtraining.setWindowTitle(_fromUtf8("teamtraining"))
+class Ui_teamqgis(object):
+    def setupUi(self, teamqgis):
+        teamqgis.setObjectName(_fromUtf8("teamqgis"))
+        teamqgis.resize(308, 328)
+        teamqgis.setWindowTitle(_fromUtf8("teamqgis"))
         self.dockWidgetContents = QtGui.QWidget()
         self.dockWidgetContents.setObjectName(_fromUtf8("dockWidgetContents"))
         self.gridLayout_3 = QtGui.QGridLayout(self.dockWidgetContents)
@@ -183,18 +183,18 @@ class Ui_teamtraining(object):
         self.fieldThreeValueComboBox.setObjectName(_fromUtf8("fieldThreeValueComboBox"))
         self.gridLayout_2.addWidget(self.frame_2, 5, 1, 1, 1)
         self.gridLayout_3.addWidget(self.browseFrame, 0, 0, 1, 1)
-        teamtraining.setWidget(self.dockWidgetContents)
+        teamqgis.setWidget(self.dockWidgetContents)
 
-        self.retranslateUi(teamtraining)
-        QtCore.QMetaObject.connectSlotsByName(teamtraining)
+        self.retranslateUi(teamqgis)
+        QtCore.QMetaObject.connectSlotsByName(teamqgis)
 
-    def retranslateUi(self, teamtraining):
-        self.panCheck.setText(_translate("teamtraining", "pan", None))
-        self.scaleCheck.setText(_translate("teamtraining", "scale", None))
-        self.actionButton.setText(_translate("teamtraining", "...", None))
-        self.translateLeftButton.setText(_translate("teamtraining", "Move Left", None))
-        self.translateRightButton.setText(_translate("teamtraining", "Move Right", None))
-        self.translateDownButton.setText(_translate("teamtraining", "Move Down", None))
-        self.translateUpButton.setText(_translate("teamtraining", "Move Up", None))
-        self.applyChangesButton.setText(_translate("teamtraining", "Apply", None))
+    def retranslateUi(self, teamqgis):
+        self.panCheck.setText(_translate("teamqgis", "pan", None))
+        self.scaleCheck.setText(_translate("teamqgis", "scale", None))
+        self.actionButton.setText(_translate("teamqgis", "...", None))
+        self.translateLeftButton.setText(_translate("teamqgis", "Move Left", None))
+        self.translateRightButton.setText(_translate("teamqgis", "Move Right", None))
+        self.translateDownButton.setText(_translate("teamqgis", "Move Down", None))
+        self.translateUpButton.setText(_translate("teamqgis", "Move Up", None))
+        self.applyChangesButton.setText(_translate("teamqgis", "Apply", None))
 

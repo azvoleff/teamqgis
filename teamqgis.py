@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# teamtraining is a QGIS plugin which allows you to browse a multiple selection.
+# teamqgis is a QGIS plugin which allows you to browse a multiple selection.
 #
 # Copyright    : (C) 2013 Denis Rouzaud
 # Email        : denis.rouzaud@gmail.com
@@ -31,12 +31,12 @@ from qgis.core import QgsMapLayer, QgsProject
 
 from core.mysettings import MySettings
 from gui.mysettingsdialog import MySettingsDialog
-from gui.teamtrainingdock import teamtrainingDock
+from gui.teamqgisdock import teamqgisDock
 
 import resources
 
 
-class teamtraining():
+class teamqgis():
     def __init__(self, iface):
         self.iface = iface
         self.settings = MySettings()
@@ -44,21 +44,21 @@ class teamtraining():
 
     def initGui(self):
         # browse action
-        self.browserAction = QAction(QIcon(":/plugins/teamtraining/icons/team.jpg"),
+        self.browserAction = QAction(QIcon(":/plugins/teamqgis/icons/team.jpg"),
                                      "Browse selected items of current layer", self.iface.mainWindow())
         self.browserAction.setEnabled(False)
         self.browserAction.triggered.connect(lambda(x): self.openBrowserDock())  # prevent passing "False" to the method
         self.iface.addToolBarIcon(self.browserAction)
-        self.iface.addPluginToMenu("&teamtraining", self.browserAction)
+        self.iface.addPluginToMenu("&teamqgis", self.browserAction)
         # settings
-        self.uisettingsAction = QAction(QIcon(":/plugins/teamtraining/icons/settings.svg"), "settings",
+        self.uisettingsAction = QAction(QIcon(":/plugins/teamqgis/icons/settings.svg"), "settings",
                                         self.iface.mainWindow())
         self.uisettingsAction.triggered.connect(self.showSettings)
-        self.iface.addPluginToMenu("&teamtraining", self.uisettingsAction)     
+        self.iface.addPluginToMenu("&teamqgis", self.uisettingsAction)     
         # help
-        self.helpAction = QAction(QIcon(":/plugins/teamtraining/icons/help.svg"), "Help", self.iface.mainWindow())
-        self.helpAction.triggered.connect(lambda: QDesktopServices().openUrl(QUrl("http://www.azvoleff.com/research/teamtraining")))
-        self.iface.addPluginToMenu("&teamtraining", self.helpAction)
+        self.helpAction = QAction(QIcon(":/plugins/teamqgis/icons/help.svg"), "Help", self.iface.mainWindow())
+        self.helpAction.triggered.connect(lambda: QDesktopServices().openUrl(QUrl("http://www.azvoleff.com/research/teamqgis")))
+        self.iface.addPluginToMenu("&teamqgis", self.helpAction)
 
         self.iface.currentLayerChanged.connect(self.currentLayerChanged)
         self.iface.mapCanvas().selectionChanged.connect(self.currentLayerChanged)
@@ -67,9 +67,9 @@ class teamtraining():
         self.currentLayerChanged(self.iface.legendInterface().currentLayer())
               
     def unload(self):
-        self.iface.removePluginMenu("&teamtraining", self.browserAction)
-        self.iface.removePluginMenu("&teamtraining", self.uisettingsAction)
-        self.iface.removePluginMenu("&teamtraining", self.helpAction)
+        self.iface.removePluginMenu("&teamqgis", self.browserAction)
+        self.iface.removePluginMenu("&teamqgis", self.uisettingsAction)
+        self.iface.removePluginMenu("&teamqgis", self.helpAction)
         self.iface.removeToolBarIcon(self.browserAction)
         
     def currentLayerChanged(self, layer):
@@ -87,7 +87,7 @@ class teamtraining():
         if layer.id() in self.docks:
             #print "layer already docked"
             return
-        dock = teamtrainingDock(self.iface, layer, currentFeature)
+        dock = teamqgisDock(self.iface, layer, currentFeature)
         dock.dockRemoved.connect(self.dockRemoved)
         if self.settings.value("dockArea") == 1:
             self.iface.addDockWidget(Qt.RightDockWidgetArea, dock)
@@ -102,9 +102,9 @@ class teamtraining():
         if not self.settings.value("saveSelectionInProject"):
             return
         for layer in self.iface.legendInterface().layers():
-            exec("selection = %s" % layer.customProperty("teamtrainingSelection", "[]"))
+            exec("selection = %s" % layer.customProperty("teamqgisSelection", "[]"))
             if len(selection) > 0:
-                currentFeature = long(layer.customProperty("teamtrainingCurrentItem", 0))
+                currentFeature = long(layer.customProperty("teamqgisCurrentItem", 0))
                 if layer.id() in self.docks:
                     self.docks[layer.id()].listCombo.setCurrentIndex(currentFeature)
                 else:
