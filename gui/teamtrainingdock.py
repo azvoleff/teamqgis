@@ -87,6 +87,12 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
 
         self.updateNameComboBoxes()
 
+        # Restore saved nameComboBox current indices if they exist
+        for nameComboBox in self.nameComboBoxes:
+            fieldName = layer.customProperty("teamtraining" + nameComboBox.objectName())
+            if fieldName != None:
+                nameComboBox.setCurrentIndex(nameComboBox.findText(fieldName))
+
         self.rubber = QgsRubberBand(self.iface.mapCanvas())
         self.selectionChanged()
         if currentFeature == self.listCombo.currentIndex():
@@ -118,6 +124,9 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             valueComboBox.addItems(legalValues)
             attr_value = feature[nameComboBox.currentText()]
             if attr_value not in legalValues:
+                self.iface.messageBar().pushMessage("Illegal class name",
+                    'Assign an allowed class or add "%s" to legal class list'%attr_value,
+                    level=QgsMessageBar.WARNING)
                 valueComboBox.addItem(attr_value)
             valueComboBox.setCurrentIndex(valueComboBox.findText(attr_value))
             print attr_value
@@ -273,6 +282,9 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.iface.mapCanvas().refresh()
         self.updateValueComboBoxes()
 
+    def nameComboBox_activated(self, i, nameComboBox):
+        self.layer.setCustomProperty('teamtraining' + nameComboBox.objectName(), nameComboBox.currentText())
+
     @pyqtSlot(name="on_previousButton_clicked")
     def previousFeature(self):
         i = self.listCombo.currentIndex()
@@ -292,6 +304,18 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
     def saveCurrentFeature(self, i):
         if self.settings.value("saveSelectionInProject"):
             self.layer.setCustomProperty("teamtrainingCurrentItem", i)
+
+    @pyqtSlot(int, name="on_fieldOneNameComboBox_activated")
+    def fieldOneNameComboBox_activated(self, i):
+        self.nameComboBox_activated(i, self.fieldOneNameComboBox)
+
+    @pyqtSlot(int, name="on_fieldTwoNameComboBox_activated")
+    def fieldTwoNameComboBox_activated(self, i):
+        self.nameComboBox_activated(i, self.fieldTwoNameComboBox)
+
+    @pyqtSlot(int, name="on_fieldThreeNameComboBox_activated")
+    def fieldThreeNameComboBox_activated(self, i):
+        self.nameComboBox_activated(i, self.fieldThreeNameComboBox)
 
     @pyqtSlot(int, name="on_listCombo_currentIndexChanged")
     def on_listCombo_currentIndexChanged(self, i):
