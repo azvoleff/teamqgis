@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_settings.ui'
 #
-# Created: Tue Dec 17 17:16:29 2013
+# Created: Wed Dec 18 09:35:37 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_Settings(object):
     def setupUi(self, Settings):
         Settings.setObjectName(_fromUtf8("Settings"))
-        Settings.resize(314, 324)
+        Settings.resize(314, 331)
         self.gridLayout = QtGui.QGridLayout(Settings)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.dockArea = QtGui.QComboBox(Settings)
@@ -118,11 +118,11 @@ class Ui_Settings(object):
         self.legalValuesList = QtGui.QListWidget(Settings)
         self.legalValuesList.setObjectName(_fromUtf8("legalValuesList"))
         self.gridLayout.addWidget(self.legalValuesList, 9, 0, 1, 2)
-        self.lineEdit = QtGui.QLineEdit(Settings)
-        self.lineEdit.setEnabled(False)
-        self.lineEdit.setText(_fromUtf8(""))
-        self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
-        self.gridLayout.addWidget(self.lineEdit, 7, 1, 1, 1)
+        self.addLegalValueLineEdit = QtGui.QLineEdit(Settings)
+        self.addLegalValueLineEdit.setEnabled(False)
+        self.addLegalValueLineEdit.setText(_fromUtf8(""))
+        self.addLegalValueLineEdit.setObjectName(_fromUtf8("addLegalValueLineEdit"))
+        self.gridLayout.addWidget(self.addLegalValueLineEdit, 7, 1, 1, 1)
 
         self.retranslateUi(Settings)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Settings.accept)
@@ -142,5 +142,5 @@ class Ui_Settings(object):
         self.label_3.setText(_translate("Settings", "Scaling", None))
         self.label_4.setText(_translate("Settings", "Dock area", None))
         self.label_7.setText(_translate("Settings", "Allowed classes:", None))
-        self.lineEdit.setPlaceholderText(_translate("Settings", "Click to add a class...", None))
+        self.addLegalValueLineEdit.setPlaceholderText(_translate("Settings", "Click to add a class...", None))
 

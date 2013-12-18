@@ -43,3 +43,4 @@ class MySettings(SettingManager):
         self.addSetting("rubberColor", "color", "global", QColor(255, 0, 0))
         self.addSetting("xres", "double", "global", 30)
         self.addSetting("yres", "double", "global", 30)
+        self.addSetting("legalValuesList", "stringlist", "global", ("NonForest", "Forest"))

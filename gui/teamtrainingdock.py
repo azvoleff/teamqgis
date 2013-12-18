@@ -25,10 +25,10 @@
 #
 #---------------------------------------------------------------------
 
-from PyQt4.QtCore import SIGNAL, pyqtSlot, pyqtSignal, Qt
+from PyQt4.QtCore import SIGNAL, pyqtSlot, pyqtSignal, Qt, QVariant
 from PyQt4.QtGui import QDockWidget, QIcon, QAction
 from qgis.core import QgsPoint, QgsRectangle, QgsFeatureRequest, QgsFeature
-from qgis.gui import QgsRubberBand, QgsMessageViewer
+from qgis.gui import QgsRubberBand, QgsMessageBar
 from qgis.utils import iface
 
 from ..core.mysettings import MySettings
@@ -82,6 +82,11 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         elif not preferredActionFound:
             self.actionButton.setDefaultAction(self.actionButton.actions()[0])
 
+        self.nameComboBoxes = [self.fieldOneNameComboBox, self.fieldTwoNameComboBox, self.fieldThreeNameComboBox]
+        self.valueComboBoxes = [self.fieldOneValueComboBox, self.fieldTwoValueComboBox, self.fieldThreeValueComboBox]
+
+        self.updateNameComboBoxes()
+
         self.rubber = QgsRubberBand(self.iface.mapCanvas())
         self.selectionChanged()
         if currentFeature == self.listCombo.currentIndex():
@@ -91,28 +96,32 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.layer.layerDeleted.connect(self.close)
         self.layer.selectionChanged.connect(self.selectionChanged)
         self.layer.layerModified.connect(self.layerChanged)
-        self.layer.editingStopped.connect(self.layerSaved)
+        self.layer.editingStopped.connect(self.editingStopped)
+        self.layer.editingStarted.connect(self.editingStarted)
 
-    def updateFieldComboBoxes(self):
+    def updateNameComboBoxes(self):
         fieldNameMap = self.layer.dataProvider().fieldNameMap()
-        for fieldName in fieldNameMap.keys():
-            self.fieldOneNameComboBox.addItem("%s"%fieldName)
-            self.fieldTwoNameComboBox.addItem("%s"%fieldName)
-            self.fieldThreeNameComboBox.addItem("%s"%fieldName)
+        allFields = fieldNameMap.keys()
+        if 'ID' in allFields: allFields.remove('ID')
+        if 'FID' in allFields: allFields.remove('FID')
+        for nameComboBox in self.nameComboBoxes:
+            nameComboBox.clear()
+            nameComboBox.addItems(allFields)
 
+    def updateValueComboBoxes(self):
         feature = self.getCurrentItem()
-
-        fieldOneNameCurrentIndex = feature.fieldNameIndex(self.fieldOneNameComboBox.currentText())
-        self.fieldOneValueComboBox.setEnabled(True)
-        self.fieldOneValueComboBox.addItem(feature.attribute(self.fieldOneNameComboBox.currentText()))
-
-        fieldTwoNameCurrentIndex = feature.fieldNameIndex(self.fieldTwoNameComboBox.currentText())
-        self.fieldTwoValueComboBox.setEnabled(True)
-        self.fieldTwoValueComboBox.addItem(feature.attribute(self.fieldTwoNameComboBox.currentText()))
-
-        # fieldOneNameCurrentIndex = feature.fieldNameIndex(self.fieldOneNameComboBox.currentText())
-        # self.fieldOneValueComboBox.setEnabled(True)
-        # self.fieldOneValueComboBox.addItem(feature.attribute(self.fieldOneNameComboBox.currentText()))
+        for (valueComboBox, nameComboBox) in zip(self.valueComboBoxes, 
+                self.nameComboBoxes):
+            valueComboBox.clear()
+            # Note need to convert tuple to list to access .remove method
+            legalValues = list(self.settings.value("legalValuesList"))
+            valueComboBox.addItems(legalValues)
+            attr_value = feature[nameComboBox.currentText()]
+            if attr_value not in legalValues:
+                valueComboBox.addItem(attr_value)
+            valueComboBox.setCurrentIndex(valueComboBox.findText(attr_value))
+            print attr_value
+            print valueComboBox.findText(attr_value)
 
     def getUniqueFieldValues(self, fieldIndex):
         uValues = []
@@ -134,6 +143,9 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.rubber.reset()
         self.layer.layerDeleted.disconnect(self.close)
         self.layer.selectionChanged.disconnect(self.selectionChanged)
+        self.layer.layerModified.disconnect(self.layerChanged)
+        self.layer.editingStopped.disconnect(self.editingStopped)
+        self.layer.editingStarted.disconnect(self.editingStarted)
         if self.settings.value("saveSelectionInProject"):
             self.layer.setCustomProperty("teamtrainingSelection", repr([]))
         self.dockRemoved.emit(self.layer.id())
@@ -153,20 +165,33 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         for fid in self.subset:
             self.listCombo.addItem("%u" % fid)
         self.setRubber(self.getCurrentItem())
-        self.updateFieldComboBoxes()
+        self.updateValueComboBoxes()
 
     def layerChanged(self):
         self.applyChangesButton.setEnabled(True)
 
-    def layerSaved(self):
+    def editingStarted(self):
+        for valueComboBox in self.valueComboBoxes:
+            valueComboBox.setEnabled(True)
+        self.translateRightButton.setEnabled(True)
+        self.translateLeftButton.setEnabled(True)
+        self.translateUpButton.setEnabled(True)
+        self.translateDownButton.setEnabled(True)
+        self.editFormButton.setDown(True)
+
+    def editingStopped(self):
         self.applyChangesButton.setEnabled(False)
+        for valueComboBox in self.valueComboBoxes:
+            valueComboBox.setEnabled(False)
+        self.translateRightButton.setEnabled(False)
+        self.translateLeftButton.setEnabled(False)
+        self.translateUpButton.setEnabled(False)
+        self.translateDownButton.setEnabled(False)
+        self.editFormButton.setDown(False)
 
     def cleanBrowserFields(self):
         self.currentPosLabel.setText('0/0')
         self.listCombo.clear()
-        self.fieldOneNameComboBox.clear()
-        self.fieldTwoNameComboBox.clear()
-        self.fieldThreeNameComboBox.clear()
           
     def panScaleToItem(self, feature):
         if self.panCheck.isChecked() is False:
@@ -215,14 +240,13 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
 
     def doTranslate(self, trans):
         # Based on the "doaffine" function in the qgsAffine plugin
-        warn = QgsMessageViewer()
         if (self.layer.geometryType() == 2):
             start=1
         else:
             start=0
         if (not self.layer.isEditable()):
-            warn.setMessageAsPlainText("Layer not in edit mode.")
-            warn.showMessage()
+            self.iface.messageBar().pushMessage("Layer not in edit mode",
+                    'Select a vector layer and choose "Toggle Editing"', level=QgsMessageBar.WARNING)
         else:
             feature = self.getCurrentItem()
             result = feature.geometry()
@@ -239,6 +263,15 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
             self.iface.mapCanvas().refresh()
             self.rubber.reset()
             self.setRubber(feature)
+
+    def changeAttribute(self, i, fieldNameComboBox, fieldValueComboBox):
+        fieldValueComboBox.setCurrentIndex(i)
+        feature = self.getCurrentItem()
+        attr_index = self.layer.dataProvider().fieldNameMap()[fieldNameComboBox.currentText()]
+        self.layer.changeAttributeValue(feature.id(), attr_index, 
+                fieldValueComboBox.currentText())
+        self.iface.mapCanvas().refresh()
+        self.updateValueComboBoxes()
 
     @pyqtSlot(name="on_previousButton_clicked")
     def previousFeature(self):
@@ -268,6 +301,7 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.rubber.reset()
         if self.listCombo.count() > 1:
             self.setRubber(feature)
+            self.updateValueComboBoxes()
         # scale to feature
         self.panScaleToItem(feature)
         # Update browser
@@ -300,7 +334,10 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
 
     @pyqtSlot(name="on_editFormButton_clicked")
     def openFeatureForm(self):
-        self.iface.openFeatureForm(self.layer, self.getCurrentItem())
+        if (self.layer.isEditable()):
+            self.layer.commitChanges()
+        else:
+            self.layer.startEditing()
 
     @pyqtSlot(name="on_translateRightButton_clicked")
     def doTranslateRight(self):
@@ -324,3 +361,15 @@ class teamtrainingDock(QDockWidget, Ui_teamtraining):
         self.layer.startEditing()
         self.layer.updateExtents()
         self.iface.mapCanvas().refresh()
+
+    @pyqtSlot(int, name="on_fieldOneValueComboBox_activated")
+    def on_fieldOneValueComboBox_activated(self, i):
+        self.changeAttribute(i, self.fieldOneNameComboBox, self.fieldOneValueComboBox)
+
+    @pyqtSlot(int, name="on_fieldTwoValueComboBox_activated")
+    def on_fieldTwoValueComboBox_activated(self, i):
+        self.changeAttribute(i, self.fieldTwoNameComboBox, self.fieldTwoValueComboBox)
+
+    @pyqtSlot(int, name="on_fieldThreeValueComboBox_activated")
+    def on_fieldThreeValueComboBox_activated(self, i):
+        self.changeAttribute(i, self.fieldThreeNameComboBox, self.fieldThreeValueComboBox)
