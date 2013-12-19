@@ -310,10 +310,7 @@
           </size>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <widget class="QComboBox" name="fieldOneNameComboBox">
           <property name="geometry">

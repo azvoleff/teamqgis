@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_teamqgis.ui'
 #
-# Created: Wed Dec 18 17:11:11 2013
+# Created: Thu Dec 19 11:05:34 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -157,8 +157,7 @@ class Ui_teamqgis(object):
         self.gridLayout_2.addWidget(self.frame, 2, 1, 1, 1)
         self.frame_2 = QtGui.QFrame(self.browseFrame)
         self.frame_2.setMinimumSize(QtCore.QSize(276, 94))
-        self.frame_2.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame_2.setFrameShape(QtGui.QFrame.NoFrame)
         self.frame_2.setObjectName(_fromUtf8("frame_2"))
         self.fieldOneNameComboBox = QtGui.QComboBox(self.frame_2)
         self.fieldOneNameComboBox.setGeometry(QtCore.QRect(0, 10, 131, 20))

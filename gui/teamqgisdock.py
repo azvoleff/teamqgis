@@ -89,7 +89,7 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
 
         # Restore saved nameComboBox current indices if they exist
         for nameComboBox in self.nameComboBoxes:
-            fieldName = layer.customProperty("teamqgis" + nameComboBox.objectName())
+            fieldName = self.layer.customProperty("teamqgis" + nameComboBox.objectName())
             if fieldName != None:
                 nameComboBox.setCurrentIndex(nameComboBox.findText(fieldName))
 
@@ -119,27 +119,16 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
         for (valueComboBox, nameComboBox) in zip(self.valueComboBoxes, 
                 self.nameComboBoxes):
             valueComboBox.clear()
-            # Note need to convert tuple to list to access .remove method
-            legalValues = list(self.settings.value("legalValuesList"))
-            valueComboBox.addItems(legalValues)
+            allowedClasses = self.layer.customProperty("teamqgisAllowedClasses")
+            if allowedClasses != None:
+                valueComboBox.addItems(allowedClasses)
             attr_value = feature[nameComboBox.currentText()]
-            if attr_value not in legalValues:
-                self.iface.messageBar().pushMessage("Illegal class name",
-                    'Assign an allowed class or add "%s" to legal class list'%attr_value,
-                    level=QgsMessageBar.WARNING)
+            if (allowedClasses == None) or (attr_value not in allowedClasses):
+                self.iface.messageBar().pushMessage("Class name not in allowed class list",
+                    'Assign an allowed class or add "%s" to allowed class list'%attr_value,
+                    level=QgsMessageBar.WARNING, duration=3)
                 valueComboBox.addItem(attr_value)
             valueComboBox.setCurrentIndex(valueComboBox.findText(attr_value))
-            print attr_value
-            print valueComboBox.findText(attr_value)
-
-    def getUniqueFieldValues(self, fieldIndex):
-        uValues = []
-        ft = QgsFeature()
-        while self.layer.dataProvider().nextFeature(ft):
-            atMap = ft.attributeMap()
-            if atMap.values()[fieldIndex].toString() not in uValues:
-                uValues.append(atMap.values()[fieldIndex].toString())
-        return uValues
 
     def setRubber(self, feature):
         self.rubber.setColor(self.settings.value("rubberColor"))
