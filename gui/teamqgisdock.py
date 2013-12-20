@@ -25,7 +25,7 @@
 #
 #---------------------------------------------------------------------
 
-from PyQt4.QtCore import SIGNAL, pyqtSlot, pyqtSignal, Qt, QVariant
+from PyQt4.QtCore import SIGNAL, pyqtSlot, pyqtSignal, Qt, QVariant, QObject
 from PyQt4.QtGui import QDockWidget, QIcon, QAction
 from qgis.core import QgsPoint, QgsRectangle, QgsFeatureRequest, QgsFeature, QgsProject
 from qgis.gui import QgsRubberBand, QgsMessageBar
@@ -103,6 +103,8 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
         self.layer.layerModified.connect(self.layerChanged)
         self.layer.editingStopped.connect(self.editingStopped)
         self.layer.editingStarted.connect(self.editingStarted)
+
+        QObject.connect(self.proj, SIGNAL("allowedClassesChanged()"), self.updateValueComboBoxes)
 
     def updateNameComboBoxes(self):
         fieldNameMap = self.layer.dataProvider().fieldNameMap()

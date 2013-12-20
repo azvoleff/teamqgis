@@ -26,7 +26,7 @@
 #---------------------------------------------------------------------
 
 from PyQt4.Qt import Qt
-from PyQt4.QtCore import pyqtSlot
+from PyQt4.QtCore import pyqtSlot, SIGNAL
 from PyQt4.QtGui import QDialog, QSizePolicy, QListWidgetItem
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsProject
@@ -81,6 +81,7 @@ class MySettingsDialog(QDialog, Ui_Settings, SettingDialog):
         allowedClasses = [self.classesListWidget.item(n).text() for n in 
                 range(self.classesListWidget.count())]
         self.proj.writeEntry('teamqgis', 'allowedClasses', allowedClasses)
+        self.proj.emit(SIGNAL("allowedClassesChanged()"))
 
     def addEditableItem(self, item):
         # Don't iterate over each character when a single item is passed:
