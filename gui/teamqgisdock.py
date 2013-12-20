@@ -27,14 +27,12 @@
 
 from PyQt4.QtCore import SIGNAL, pyqtSlot, pyqtSignal, Qt, QVariant
 from PyQt4.QtGui import QDockWidget, QIcon, QAction
-from qgis.core import QgsPoint, QgsRectangle, QgsFeatureRequest, QgsFeature
+from qgis.core import QgsPoint, QgsRectangle, QgsFeatureRequest, QgsFeature, QgsProject
 from qgis.gui import QgsRubberBand, QgsMessageBar
 from qgis.utils import iface
 
 from ..core.mysettings import MySettings
 from ..ui.ui_teamqgis import Ui_teamqgis
-
-from dualview import ViewWindow
 
 class teamqgisDock(QDockWidget, Ui_teamqgis):
     dockRemoved = pyqtSignal(str)
@@ -42,6 +40,7 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
     def __init__(self, iface, layer, currentFeature):
         self.iface = iface
         self.layer = layer
+        self.proj = QgsProject.instance()
         self.renderer = self.iface.mapCanvas().mapRenderer()
         self.settings = MySettings()
         QDockWidget.__init__(self)
@@ -119,8 +118,8 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
         for (valueComboBox, nameComboBox) in zip(self.valueComboBoxes, 
                 self.nameComboBoxes):
             valueComboBox.clear()
-            allowedClasses = self.layer.customProperty("teamqgisAllowedClasses")
-            if allowedClasses != None:
+            allowedClasses, hasAllowedClasses = self.proj.readListEntry("teamqgis", "allowedClasses")
+            if hasAllowedClasses:
                 valueComboBox.addItems(allowedClasses)
             attr_value = feature[nameComboBox.currentText()]
             if (allowedClasses == None) or (attr_value not in allowedClasses):
@@ -321,10 +320,6 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
         self.currentPosLabel.setText("%u/%u" % (i+1, len(self.subset)))
         # emit signal
         self.layer.emit(SIGNAL("browserCurrentItem(long)"), feature.id())
-        if self.settings.value("useDualView"):
-            # dv = ViewWindow(iface.activeLayer())
-            # dv.show()
-            pass
           
     @pyqtSlot(int, name="on_panCheck_stateChanged")
     def on_panCheck_stateChanged(self, i):

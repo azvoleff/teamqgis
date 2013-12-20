@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_settings.ui'
 #
-# Created: Thu Dec 19 15:33:12 2013
+# Created: Fri Dec 20 13:50:16 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -29,10 +29,6 @@ class Ui_Settings(object):
         Settings.resize(325, 395)
         self.gridLayout = QtGui.QGridLayout(Settings)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.useDualView = QtGui.QCheckBox(Settings)
-        self.useDualView.setMaximumSize(QtCore.QSize(16777215, 17))
-        self.useDualView.setObjectName(_fromUtf8("useDualView"))
-        self.gridLayout.addWidget(self.useDualView, 2, 1, 1, 1)
         self.readClassesCSV = QtGui.QPushButton(Settings)
         self.readClassesCSV.setObjectName(_fromUtf8("readClassesCSV"))
         self.gridLayout.addWidget(self.readClassesCSV, 12, 0, 1, 1)
@@ -156,7 +152,6 @@ class Ui_Settings(object):
 
     def retranslateUi(self, Settings):
         Settings.setWindowTitle(_translate("Settings", "teamqgis :: settings", None))
-        self.useDualView.setText(_translate("Settings", "use dual view", None))
         self.readClassesCSV.setText(_translate("Settings", "Read classes from CSV", None))
         self.saveSelectionInProject.setText(_translate("Settings", "save selection in project", None))
         self.scalinglabel.setText(_translate("Settings", "Scaling", None))

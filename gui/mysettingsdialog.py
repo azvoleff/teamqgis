@@ -25,9 +25,11 @@
 #
 #---------------------------------------------------------------------
 
+from PyQt4.Qt import Qt
 from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import QDialog, QSizePolicy
+from PyQt4.QtGui import QDialog, QSizePolicy, QListWidgetItem
 from qgis.gui import QgsMessageBar
+from qgis.core import QgsProject
 
 from ..qgissettingmanager import SettingDialog
 
@@ -47,23 +49,49 @@ class MySettingsDialog(QDialog, Ui_Settings, SettingDialog):
         self.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.layout().addWidget(self.bar, 0, 0, 1, 2)
 
-        # self.classesListWidget.itemActivated.connect(self.classesListWidget_itemActivated)
-        self.addClassLineEdit.textEdited.connect(self.addClassLineEdit_textEdited)
-        #self.addClassLineEdit.focusOutEvent = self.addClassLineEdit_focusOutEvent
+        self.proj = QgsProject.instance()
 
-    # def classesListWidget_itemActivated(self):
-    #     self.removeClassButton.setEnabled(True)
+        allowedClasses, hasAllowedClasses = self.proj.readListEntry("teamqgis", "allowedClasses")
+        if hasAllowedClasses: self.addEditableItems(allowedClasses)
+
+        self.addClassLineEdit.textEdited.connect(self.addClassLineEdit_textEdited)
+        self.addClassLineEdit.textChanged.connect(self.addClassLineEdit_textChanged)
+        classesListWidgetModel = self.classesListWidget.model()
+
+        classesListWidgetModel.rowsRemoved.connect(self.classesListWidgetModel_dataChanged)
+        classesListWidgetModel.rowsInserted.connect(self.classesListWidgetModel_dataChanged)
+        classesListWidgetModel.dataChanged.connect(self.classesListWidgetModel_dataChanged)
+        classesListWidgetModel.layoutChanged.connect(self.classesListWidgetModel_dataChanged)
+
+    def addClassLineEdit_textChanged(self):
+        if self.addClassLineEdit.text() == "": self.addClassButton.setEnabled(False)
 
     def addClassLineEdit_textEdited(self):
         self.addClassButton.setEnabled(True)
 
-    # Commented out as need to figure out how to keep the focusOut from acting 
-    # when the addClassButton is clicked (making it so the field clears before 
-    # the class is added)
-    # def addClassLineEdit_focusOutEvent(self, event):
-    #     print event
-    #     self.addClassButton.setEnabled(False)
-    #     self.addClassLineEdit.clear()
+    def closeEvent(self, event):
+        self.addClassLineEdit.textEdited.disconnect(self.addClassLineEdit_textEdited)
+        self.addClassLineEdit.textChanged.disconnect(self.addClassLineEdit_textChanged)
+
+    def classesListWidgetModel_dataChanged(self, *arg):
+        if self.classesListWidget.count() > 0:
+            self.removeClassButton.setEnabled(True)
+        else:
+            self.removeClassButton.setEnabled(False)
+        allowedClasses = [self.classesListWidget.item(n).text() for n in 
+                range(self.classesListWidget.count())]
+        self.proj.writeEntry('teamqgis', 'allowedClasses', allowedClasses)
+
+    def addEditableItem(self, item):
+        # Don't iterate over each character when a single item is passed:
+        newItem = QListWidgetItem(item)
+        newItem.setData(Qt.UserRole, item)
+        newItem.setFlags(newItem.flags() | Qt.ItemIsEditable)
+        self.classesListWidget.addItem(newItem)
+
+    def addEditableItems(self, items):
+        for item in items:
+            self.addEditableItem(item)
 
     @pyqtSlot(name="on_removeClassButton_clicked")
     def removeClassButton_clicked(self):
@@ -72,21 +100,11 @@ class MySettingsDialog(QDialog, Ui_Settings, SettingDialog):
     @pyqtSlot(name="on_addClassButton_clicked")
     def addClassButton_clicked(self):
         newClass = self.addClassLineEdit.text()
+        self.addClassLineEdit.clear()
         if newClass != "":
             existingClasses = [self.classesListWidget.item(n).text() for n in range(self.classesListWidget.count())]
-            print existingClasses
             if newClass in existingClasses:
                 self.bar.pushMessage("Error", '"%s" already in allowed classes list'%newClass, level=QgsMessageBar.WARNING, duration=3)
             else:
-                self.classesListWidget.addItem(newClass)
+                self.addEditableItem(newClass)
         self.addClassButton.setEnabled(False)
-        self.addClassLineEdit.clear()
-
-    @pyqtSlot(int, name="on_classesListWidget_currentRowChanged")
-    def classesListWidget_currentRowChanged(self):
-        if self.classesListWidget.count() > 0:
-            self.removeClassButton.setEnabled(True)
-        else:
-            self.removeClassButton.setEnabled(False)
-
-        #self.layer.setCustomProperty('teamqgis' + nameComboBox.objectName(), nameComboBox.currentText())

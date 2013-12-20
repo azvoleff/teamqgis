@@ -113,7 +113,3 @@ class teamqgis():
 
     def showSettings(self):
         MySettingsDialog().exec_()
-
-
-
-
