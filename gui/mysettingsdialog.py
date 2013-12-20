@@ -56,8 +56,10 @@ class MySettingsDialog(QDialog, Ui_Settings, SettingDialog):
 
         self.addClassLineEdit.textEdited.connect(self.addClassLineEdit_textEdited)
         self.addClassLineEdit.textChanged.connect(self.addClassLineEdit_textChanged)
-        classesListWidgetModel = self.classesListWidget.model()
 
+        self.classesListWidget.itemSelectionChanged.connect(self.classesListWidget_selectionChanged)
+
+        classesListWidgetModel = self.classesListWidget.model()
         classesListWidgetModel.rowsRemoved.connect(self.classesListWidgetModel_dataChanged)
         classesListWidgetModel.rowsInserted.connect(self.classesListWidgetModel_dataChanged)
         classesListWidgetModel.dataChanged.connect(self.classesListWidgetModel_dataChanged)
@@ -72,6 +74,12 @@ class MySettingsDialog(QDialog, Ui_Settings, SettingDialog):
     def closeEvent(self, event):
         self.addClassLineEdit.textEdited.disconnect(self.addClassLineEdit_textEdited)
         self.addClassLineEdit.textChanged.disconnect(self.addClassLineEdit_textChanged)
+
+    def classesListWidget_selectionChanged(self):
+        if self.classesListWidget.count() > 0:
+            self.removeClassButton.setEnabled(True)
+        else:
+            self.removeClassButton.setEnabled(False)
 
     def classesListWidgetModel_dataChanged(self, *arg):
         if self.classesListWidget.count() > 0:
