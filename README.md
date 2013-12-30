@@ -1,7 +1,7 @@
 # teamqgis Quantum GIS plugin
 
 `teamqgis` is a [Quantum GIS (QGIS)](http://www.qgis.org/) plugin used to 
-support digitizing training and validation data from remote sensing imagery.  
+support digitizing training and validation data from remote sensing imagery.
 The plugin was created to support the work of the the Tropical Ecology 
 Assessment and Monitoring (TEAM) Network. The [TEAM 
 Network](http://www.teamnetwork.org/) is a global network of sites in tropical 
