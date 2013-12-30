@@ -1,7 +1,7 @@
 
 [general]
 name=teamqgis
-description= (based on itembrowser plugin by Denis Rouzaud)
+description= Supports digitizing training and validation data from remote sensing imagery. Based on the "itembrowser" plugin by Denis Rouzaud.
 version=0.1
 qgisMinimumVersion=2.0
 author=Alex Zvoleff
