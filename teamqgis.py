@@ -76,7 +76,7 @@ class teamqgis():
         enable = (layer is not None
                   and layer.type() == QgsMapLayer.VectorLayer
                   and layer.hasGeometryType()
-                  and len(layer.selectedFeaturesIds()) > 1)
+                  and len(layer.selectedFeaturesIds()) >= 1)
         self.browserAction.setEnabled(enable)
 
     def openBrowserDock(self, layer=None, currentFeature=0):

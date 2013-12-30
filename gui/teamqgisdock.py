@@ -153,7 +153,7 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
         self.cleanBrowserFields()
         self.rubber.reset()
         nItems = self.layer.selectedFeatureCount()
-        if nItems < 2:
+        if nItems < 1:
             self.close()
             self.layer.emit(SIGNAL("browserNoItem()"))
             return
