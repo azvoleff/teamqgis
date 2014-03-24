@@ -9,7 +9,7 @@ email=azvoleff@conservation.org
 
 icon=icons/team.jpg
 tags=training,TEAM,classification,sample,feature,selection
-homepage=http://www.azvoleff.com/research/teamqgis
+homepage=http://www.azvoleff.com/teamqgis
 tracker=https://github.com/azvoleff/teamqgis/issues
 repository=https://github.com/azvoleff/teamqgis
 

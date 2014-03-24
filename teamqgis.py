@@ -57,7 +57,7 @@ class teamqgis():
         self.iface.addPluginToMenu("&teamqgis", self.uisettingsAction)     
         # help
         self.helpAction = QAction(QIcon(":/plugins/teamqgis/icons/help.svg"), "Help", self.iface.mainWindow())
-        self.helpAction.triggered.connect(lambda: QDesktopServices().openUrl(QUrl("http://www.azvoleff.com/research/teamqgis")))
+        self.helpAction.triggered.connect(lambda: QDesktopServices().openUrl(QUrl("http://www.azvoleff.com/teamqgis")))
         self.iface.addPluginToMenu("&teamqgis", self.helpAction)
 
         self.iface.currentLayerChanged.connect(self.currentLayerChanged)
