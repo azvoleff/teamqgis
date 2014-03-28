@@ -123,7 +123,7 @@ class teamqgisDock(QDockWidget, Ui_teamqgis):
             allowedClasses, hasAllowedClasses = self.proj.readListEntry("teamqgis", "allowedClasses")
             if hasAllowedClasses:
                 valueComboBox.addItems(allowedClasses)
-            attr_value = feature[nameComboBox.currentText()]
+            attr_value = str(feature[nameComboBox.currentText()])
             if (allowedClasses == None) or (attr_value not in allowedClasses):
                 self.iface.messageBar().pushMessage("Class name not in allowed class list",
                     'Assign an allowed class or add "%s" to allowed class list'%attr_value,
